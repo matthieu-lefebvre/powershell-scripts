@@ -435,13 +435,11 @@ Else {
 Write-VerboseLog "PS Remoting has been successfully configured for Ansible."
 
 # Configure Network to Private
-Set-NetConnectionProfile Private
-
+Set-NetConnectionProfile -InterfaceAlias Ethernet -NetworkCategory Private
 
 # Add second Disk
 Initialize-Disk -Number 2 -PartitionStyle MBR -PassThru
-New-Partition -DiskNumber 2 -DriveLetter T -UseMaximumSize
-Format-Volume -FileSystem NTFS -NewFileSystemLabel "TTS"
+New-Partition -DiskNumber 2 -DriveLetter T -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel "TTS"
 
 #Install python
 # Download the latest version of Python from the official website
