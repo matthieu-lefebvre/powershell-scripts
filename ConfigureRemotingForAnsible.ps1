@@ -434,4 +434,24 @@ Else {
 }
 Write-VerboseLog "PS Remoting has been successfully configured for Ansible."
 
+# Configure Network to Private
 Set-NetConnectionProfile Private
+
+
+# Add second Disk
+Initialize-Disk -Number 2 -PartitionStyle MBR -PassThru
+New-Partition -DiskNumber 2 -DriveLetter T -UseMaximumSize
+Format-Volume -FileSystem NTFS -NewFileSystemLabel "TTS"
+
+#Install python
+# Download the latest version of Python from the official website
+$pythonUrl = "https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe"
+$pythonInstaller = "$($env:TEMP)\python.exe"
+Invoke-WebRequest -Uri $pythonUrl -OutFile $pythonInstaller
+
+# Install Python with default settings
+Start-Process -FilePath $pythonInstaller -ArgumentList "/quiet" -Wait
+
+# Add Python to the PATH environment variable
+$pythonPath = Join-Path $env:ProgramFiles "Python310"
+[System.Environment]::SetEnvironmentVariable("Path", "$($env:Path);$pythonPath", "User")
