@@ -3,3 +3,4 @@
 mkfs.ext4 /dev/sdc1
 mkdir /mnt/TTS
 mount /dev/sdc1 /mnt/TTS
+chown -R ansible:ansible /mnt/TTS
