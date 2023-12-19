@@ -434,11 +434,11 @@ Else {
 }
 Write-VerboseLog "PS Remoting has been successfully configured for Ansible."
 
-#Allow Unencrypted for ansible
-winrm set winrm/config/service '@{AllowUnencrypted="true"}'
-
 # Configure Network to Private
 Set-NetConnectionProfile -InterfaceAlias Ethernet -NetworkCategory Private
+
+#Allow Unencrypted for ansible
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 
 # Add second Disk
 Initialize-Disk -Number 2 -PartitionStyle MBR -PassThru
