@@ -1,7 +1,9 @@
-# 1. Install Chocolatey package manager
+# Set execution policy to Bypass for this session
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+
+# Continue with the rest of your script
+# Install Chocolatey package manager
 try {
-    Set-ExecutionPolicy Bypass -Scope Process -Force
-    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
     iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 } catch {
@@ -9,7 +11,7 @@ try {
     exit 1
 }
 
-# 2. Install choco packages and reload path
+# Install choco packages and reload path
 try {
     choco install -y git
     choco install -y pwsh
@@ -21,7 +23,7 @@ try {
     exit 1
 }
 
-# 3. Configure Winrm
+# Configure Winrm
 try {
     Enable-PSRemoting -Force
     winrm quickconfig -q
