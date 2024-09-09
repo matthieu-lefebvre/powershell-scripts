@@ -468,5 +468,10 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";"
 choco install -y git
 choco install -y pwsh
 choco install -y python3
-choco install -y miniconda3 --params="'/InstallationType:[AllUsers]'"
+#choco install -y miniconda3 --params="'/InstallationType:[AllUsers]'"
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+# 4. Install miniconda
+curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe -o miniconda.exe
+Start-Process -FilePath ".\miniconda.exe" -ArgumentList "/S" -Wait
+del miniconda.exe
