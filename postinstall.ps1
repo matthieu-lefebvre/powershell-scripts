@@ -440,9 +440,9 @@ Set-NetConnectionProfile -InterfaceAlias Ethernet -NetworkCategory Private
 #Allow Unencrypted for ansible
 winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 
-# Add second Disk
-Initialize-Disk -Number 2 -PartitionStyle MBR -PassThru
-New-Partition -DiskNumber 2 -DriveLetter T -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel "TTS"
+# # Add second Disk
+# Initialize-Disk -Number 2 -PartitionStyle MBR -PassThru
+# New-Partition -DiskNumber 2 -DriveLetter T -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel "TTS"
 
 # #Install python
 # # Download the latest version of Python from the official website
